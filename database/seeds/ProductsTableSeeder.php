@@ -18,7 +18,8 @@ class ProductsTableSeeder extends Seeder
         string $shortDescription,
         string $description,
         string $price,
-        string $image = null
+        string $image = null,
+        bool $showOnly = false
     )
     {
         return [
@@ -28,7 +29,8 @@ class ProductsTableSeeder extends Seeder
             'short_description' => $shortDescription,
             'description' => $description,
             'price' => $price,
-            'image' => $image
+            'image' => $image,
+            'show_only' => $showOnly
         ];
     }
     private function addProductToList(array $product)
@@ -49,7 +51,8 @@ class ProductsTableSeeder extends Seeder
                     'short_description',
                     'description',
                     'price',
-                    'image'
+                    'image',
+                    'show_only'
                 ]);
                 if (! $productCreated = \App\Product::create($productData))
                     return;
@@ -110,7 +113,9 @@ class ProductsTableSeeder extends Seeder
             'Product bundle B_00001',
             'Short Description',
             'Description',
-            12
+            12,
+            null,
+            true
         );
         $productItems = collect([
             $productSimple1, $productSimple2, $productSimple3

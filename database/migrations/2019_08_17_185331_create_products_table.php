@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->float('price');
             $table->string('image')->nullable();
             $table->boolean('active')->default(false);
+            $table->boolean('show_only')->default(false);
             $table->timestamps();
         });
 
