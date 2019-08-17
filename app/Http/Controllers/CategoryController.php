@@ -4,21 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Services\CategoryService;
 use App\Services\ProductService;
-use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class CategoryController extends Controller
 {
-    public function __construct()
-    {
-    }
-
-    public function index()
+    public function category($code)
     {
         $categoryService = new CategoryService();
-        $productService = new ProductService();
-
+        $category = $categoryService->findByCode($code);
         $categories = $categoryService->findAllCascading();
-        $products = $productService->findAll();
+        $products = $category->products;
 
         return view('home', [
             'categories' => $categories,

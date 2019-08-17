@@ -13,6 +13,11 @@ class CategoryRepository
         $this->model = new Category();
     }
 
+    public function findByCode($code)
+    {
+        return $this->model->where('code', $code)->first();
+    }
+
     public function findByParentIdIsNull()
     {
         return $this->model->whereNull('parent_id')->get();

@@ -23,6 +23,11 @@ class CategoryService
         return $categoriesWhereParentIdIsNull;
     }
 
+    public function findByCode($code)
+    {
+        return $this->repository->findByCode($code);
+    }
+
     public function findByParentIdIsNull()
     {
         return $this->repository->findByParentIdIsNull();
