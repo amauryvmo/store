@@ -1,0 +1,9 @@
+type,sku,name,short_description,description,price,image
+simple,S_0001,Test,Test,Test,35,
+simple,S_0002,Test,Test,Test,36,
+simple,S_0003,Test,Test,Test,37,
+simple,S_0004,Test,Test,Test,38,
+simple,S_0005,Test,Test,Test,39,
+simple,S_0006,Test,Test,Test,40,
+simple,S_0007,Test,Test,Test,41,
+simple,S_0008,Test,Test,Test,42,
