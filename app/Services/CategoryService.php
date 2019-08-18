@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Category;
 use App\Repositories\CategoryRepository;
 
 class CategoryService
@@ -21,6 +22,18 @@ class CategoryService
             return $category;
         });
         return $categoriesWhereParentIdIsNull;
+    }
+
+    public function createCategory(array $dataCategory)
+    {
+        $category = new Category();
+        $category->fill($dataCategory);
+        return $this->create($category);
+    }
+
+    public function create(Category $category)
+    {
+        return $this->repository->create($category);
     }
 
     public function findByCode($code)

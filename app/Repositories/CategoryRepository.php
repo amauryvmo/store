@@ -13,6 +13,11 @@ class CategoryRepository
         $this->model = new Category();
     }
 
+    public function create(Category $category)
+    {
+        return $this->model->create($category->toArray());
+    }
+
     public function findByCode($code)
     {
         return $this->model->where('code', $code)->first();

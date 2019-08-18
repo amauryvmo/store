@@ -13,6 +13,8 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::get('/dashboard','HomeController@index')->name('home');
 
     Route::get('/categories', 'CategoryController@index')->name('categories');
+    Route::get('/categories/new', 'CategoryController@new')->name('categories.new');
+    Route::post('/categories', 'CategoryController@create')->name('categories.create');
     Route::get('/categories/{code}', 'CategoryController@category')->name('categories.code');
     Route::get('/products', 'ProductController@index')->name('products');
 

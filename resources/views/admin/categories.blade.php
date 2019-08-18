@@ -2,6 +2,12 @@
 
 @section('content')
     <div class="container">
+
+        <p>
+            <a href="{{ route('admin.categories.new') }}" class="btn btn-outline-primary float-right">Add</a>
+            <div class="clearfix"></div>
+        </p>
+
         <table class="table table-bordered">
             <tbody>
                 @foreach($categories as $category)

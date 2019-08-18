@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Services\CategoryService;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -33,5 +34,36 @@ class CategoryController extends Controller
             'category' => $category,
             'categories' => $categories
         ]);
+    }
+
+    public function new()
+    {
+        $categories = $this->service->findByParentIdIsNull();
+
+        return view('admin.categories-new', [
+            'categories' => $categories
+        ]);
+    }
+
+    public function create(Request $request)
+    {
+        $rules = [
+            'code' => 'required|string',
+            'name' => 'required|string'
+        ];
+        if ($request->get('parent_id'))
+            data_set($rules, 'parent_id', 'exists:categories,id');
+
+        $request->validate($rules);
+
+        $dataCategory = $request->only([
+            'parent_id', 'code', 'name'
+        ]);
+
+        $this->service->createCategory($dataCategory);
+
+        return redirect()
+            ->route('admin.categories')
+            ->with('success', "Category successfully registered!");
     }
 }
