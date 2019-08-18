@@ -13,6 +13,7 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::get('/dashboard','HomeController@index')->name('home');
 
     Route::get('/categories', 'CategoryController@index')->name('categories');
+    Route::get('/categories/{code}', 'CategoryController@category')->name('categories.code');
     Route::get('/products', 'ProductController@index')->name('products');
 
     Route::namespace('Auth')->group(function() {
