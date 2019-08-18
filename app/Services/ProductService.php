@@ -13,6 +13,11 @@ class ProductService
         $this->repository = new ProductRepository();
     }
 
+    public function find($id)
+    {
+        return $this->repository->find($id);
+    }
+
     public function findAll()
     {
         return $this->repository->findAll();
