@@ -36,6 +36,11 @@ class CategoryService
         return $this->repository->create($category);
     }
 
+    public function find($id)
+    {
+        return $this->repository->find($id);
+    }
+
     public function findByCode($code)
     {
         return $this->repository->findByCode($code);

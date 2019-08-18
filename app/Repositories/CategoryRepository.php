@@ -18,6 +18,11 @@ class CategoryRepository
         return $this->model->create($category->toArray());
     }
 
+    public function find($id)
+    {
+        return $this->model->find($id);
+    }
+
     public function findByCode($code)
     {
         return $this->model->where('code', $code)->first();

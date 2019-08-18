@@ -49,16 +49,19 @@ class ProductController extends Controller
             'type'  => "required|in:{$productTypesImploded}",
             'sku'   => 'required|string|unique:products',
             'name'  => 'required|string',
+            'image' => 'string',
             'price' => "required|regex:/^\d+(\.\d{1,2})?$/",
             'active' => 'required|boolean',
-            'show_only' => 'required|boolean'
+            'show_only' => 'required|boolean',
+            'categories.*' => 'integer|exists:categories,id'
         ]);
 
         $dataProduct = $request->only([
-            'type', 'sku', 'name', 'price', 'active', 'show_only'
+            'type', 'sku', 'name', 'price', 'active', 'show_only', 'image'
         ]);
+        $categories = $request->get('categories', []);
 
-        $this->service->createProduct($dataProduct);
+        $this->service->createProduct($dataProduct, $categories);
 
         return redirect()
             ->route('admin.products')

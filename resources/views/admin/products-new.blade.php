@@ -1,5 +1,9 @@
 @extends('admin.layouts.app')
 
+@push('stylesheets')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+@endpush
+
 @section('content')
     <div class="container">
         <div class="card">
@@ -48,6 +52,19 @@
                             @if ($errors->has('name'))
                                 <small class="text-danger">
                                     {{ $errors->first('name') }}
+                                </small>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="image" class="col-sm-2 col-form-label {{ $errors->has('image') ? 'text-danger' : '' }}">Image</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image" name="image" value="{{ old('image') }}">
+                        </div>
+                        <div class="col-sm-5">
+                            @if ($errors->has('image'))
+                                <small class="text-danger">
+                                    {{ $errors->first('image') }}
                                 </small>
                             @endif
                         </div>
@@ -113,7 +130,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="active" class="col-sm-2 col-form-label {{ $errors->has('active') ? 'text-danger' : '' }}">Show Only</label>
+                        <label for="active" class="col-sm-2 col-form-label {{ $errors->has('active') ? 'text-danger' : '' }}">Active</label>
                         <div class="col-sm-5">
                             <select class="form-control {{ $errors->has('active') ? 'is-invalid' : '' }}" id="active" name="active">
                                 <option value="0" {{ old('active') == '0' ? 'selected' : '' }} selected>Não</option>
@@ -128,6 +145,24 @@
                             @endif
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="categories" class="col-sm-2 col-form-label {{ $errors->has('categories') ? 'text-danger' : '' }}">Categories</label>
+                        <div class="col-sm-5">
+                            <select class="selectpicker" name="categories[]" id="categories" multiple>
+                                <option value=""> --- </option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            @if ($errors->has('categories'))
+                                <small class="text-danger">
+                                    {{ $errors->first('categories') }}
+                                </small>
+                            @endif
+                        </div>
+                    </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -135,3 +170,8 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+{{--    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>--}}
+@endpush
