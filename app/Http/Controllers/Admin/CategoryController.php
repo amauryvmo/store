@@ -36,11 +36,15 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function new()
+    public function new(Request $request)
     {
         $categories = $this->service->findByParentIdIsNull();
 
+        $category = $this->service->findByCode($request->get('parent_code'));
+        $categoryId = $category ? $category->id : NULL;
+
         return view('admin.categories-new', [
+            'categoryId' => $categoryId,
             'categories' => $categories
         ]);
     }
@@ -48,7 +52,7 @@ class CategoryController extends Controller
     public function create(Request $request)
     {
         $rules = [
-            'code' => 'required|string',
+            'code' => 'required|string|unique:categories',
             'name' => 'required|string'
         ];
         if ($request->get('parent_id'))

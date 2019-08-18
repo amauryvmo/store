@@ -12,7 +12,12 @@
             <tbody>
                 @foreach($categories as $category)
                     <tr>
-                        <td><a href="{{ route('admin.categories.code', $category->code) }}">{{ $category->name }}</a></td>
+                        <td>
+                            <a href="{{ route('admin.categories.code', $category->code) }}">{{ $category->name }}</a>
+                            ({{ $category->categories->count() }})
+
+                            <a href="{{ route('admin.categories.new', ['parent_code' => $category->code]) }}" class="btn btn-outline-primary float-right">Add</a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

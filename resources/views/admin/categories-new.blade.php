@@ -15,7 +15,7 @@
                             <select class="form-control {{ $errors->has('parent_id') ? 'is-invalid' : '' }}" id="parentId" name="parent_id">
                                 <option value=""> --- </option>
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" {{ old('parent_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}" {{ old('parent_id', $categoryId) == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>

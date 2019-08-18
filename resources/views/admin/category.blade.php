@@ -5,7 +5,10 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>{{ $category->name }} - Sub Categorias</th>
+                    <th>
+                        {{ $category->name }} - Sub Categorias
+                        <a href="{{ route('admin.categories.new', ['parent_code' => $category->code]) }}" class="btn btn-outline-primary float-right">Add</a>
+                    </th>
                 </tr>
             </thead>
             <tbody>
