@@ -17,6 +17,8 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::post('/categories', 'CategoryController@create')->name('categories.create');
     Route::get('/categories/{code}', 'CategoryController@category')->name('categories.code');
     Route::get('/products', 'ProductController@index')->name('products');
+    Route::get('/products/new', 'ProductController@new')->name('products.new');
+    Route::post('/products', 'ProductController@create')->name('products.create');
 
     Route::namespace('Auth')->group(function() {
 
