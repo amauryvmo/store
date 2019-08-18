@@ -14,7 +14,7 @@
 
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('admin.home') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -50,9 +50,20 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <br/>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="list-group">
+                        <a href="{{ route('admin.categories') }}" class="list-group-item list-group-item-action">{{ __('Category') }}</a>
+                        <a href="{{ route('admin.products') }}" class="list-group-item list-group-item-action">{{ __('Product') }}</a>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
