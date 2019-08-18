@@ -49,11 +49,13 @@ class ProductController extends Controller
             'type'  => "required|in:{$productTypesImploded}",
             'sku'   => 'required|string|unique:products',
             'name'  => 'required|string',
-            'price' => "required|regex:/^\d+(\.\d{1,2})?$/"
+            'price' => "required|regex:/^\d+(\.\d{1,2})?$/",
+            'active' => 'required|boolean',
+            'show_only' => 'required|boolean'
         ]);
 
         $dataProduct = $request->only([
-            'type', 'sku', 'name', 'price'
+            'type', 'sku', 'name', 'price', 'active', 'show_only'
         ]);
 
         $this->service->createProduct($dataProduct);

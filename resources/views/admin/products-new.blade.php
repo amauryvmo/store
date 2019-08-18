@@ -10,7 +10,7 @@
                     @csrf
 
                     <div class="form-group row">
-                        <label for="name" class="col-sm-2 col-form-label {{ $errors->has('type') ? 'text-danger' : '' }}">Type</label>
+                        <label for="type" class="col-sm-2 col-form-label {{ $errors->has('type') ? 'text-danger' : '' }}">Type</label>
                         <div class="col-sm-5">
                             <select class="form-control {{ $errors->has('type') ? 'is-invalid' : '' }}" id="type" name="type">
                                 <option value=""> --- </option>
@@ -91,6 +91,39 @@
                             @if ($errors->has('price'))
                                 <small class="text-danger">
                                     {{ $errors->first('price') }}
+                                </small>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="showOnly" class="col-sm-2 col-form-label {{ $errors->has('show_only') ? 'text-danger' : '' }}">Show Only</label>
+                        <div class="col-sm-5">
+                            <select class="form-control {{ $errors->has('show_only') ? 'is-invalid' : '' }}" id="showOnly" name="show_only">
+                                <option value=""> --- </option>
+                                <option value="1" {{ old('show_only') == '1' ? 'selected' : '' }}>Sim</option>
+                                <option value="0" {{ old('show_only') == '0' ? 'selected' : '' }}>Não</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            @if ($errors->has('show_only'))
+                                <small class="text-danger">
+                                    {{ $errors->first('show_only') }}
+                                </small>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="active" class="col-sm-2 col-form-label {{ $errors->has('active') ? 'text-danger' : '' }}">Show Only</label>
+                        <div class="col-sm-5">
+                            <select class="form-control {{ $errors->has('active') ? 'is-invalid' : '' }}" id="active" name="active">
+                                <option value="0" {{ old('active') == '0' ? 'selected' : '' }} selected>Não</option>
+                                <option value="1" {{ old('active') == '1' ? 'selected' : '' }}>Sim</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            @if ($errors->has('active'))
+                                <small class="text-danger">
+                                    {{ $errors->first('active') }}
                                 </small>
                             @endif
                         </div>
