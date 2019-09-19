@@ -10,30 +10,30 @@
             <div class="card-body">
                 <h5>New Product</h5>
 
-                <form method="post" action="{{ route('admin.products.create') }}">
+                <form method="post" action="{{ route('admin.products.sku.update', $product->sku) }}">
                     @csrf
 
-                    <div class="form-group row">
-                        <label for="type" class="col-sm-2 col-form-label {{ $errors->has('type') ? 'text-danger' : '' }}">Type</label>
-                        <div class="col-sm-5">
-                            <select class="form-control {{ $errors->has('type') ? 'is-invalid' : '' }}" id="type" name="type">
-                                <option value=""> --- </option>
-                                <option value="{{ \App\Product::TYPE_SIMPLE }}" {{ old('type') == \App\Product::TYPE_SIMPLE ? 'selected' : '' }}>Simple</option>
-                                <option value="{{ \App\Product::TYPE_BUNDLE }}" {{ old('type') == \App\Product::TYPE_BUNDLE ? 'selected' : '' }}>Bundle</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-5">
-                            @if ($errors->has('type'))
-                                <small class="text-danger">
-                                    {{ $errors->first('type') }}
-                                </small>
-                            @endif
-                        </div>
-                    </div>
+{{--                    <div class="form-group row">--}}
+{{--                        <label for="type" class="col-sm-2 col-form-label {{ $errors->has('type') ? 'text-danger' : '' }}">Type</label>--}}
+{{--                        <div class="col-sm-5">--}}
+{{--                            <select class="form-control {{ $errors->has('type') ? 'is-invalid' : '' }}" id="type" name="type">--}}
+{{--                                <option value=""> --- </option>--}}
+{{--                                <option value="{{ \App\Product::TYPE_SIMPLE }}" {{ old('type') == \App\Product::TYPE_SIMPLE ? 'selected' : '' }}>Simple</option>--}}
+{{--                                <option value="{{ \App\Product::TYPE_BUNDLE }}" {{ old('type') == \App\Product::TYPE_BUNDLE ? 'selected' : '' }}>Bundle</option>--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-sm-5">--}}
+{{--                            @if ($errors->has('type'))--}}
+{{--                                <small class="text-danger">--}}
+{{--                                    {{ $errors->first('type') }}--}}
+{{--                                </small>--}}
+{{--                            @endif--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div class="form-group row">
                         <label for="sku" class="col-sm-2 col-form-label {{ $errors->has('sku') ? 'text-danger' : '' }}">SKU</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control {{ $errors->has('sku') ? 'is-invalid' : '' }}" id="sku" name="sku" value="{{ old('sku') }}">
+                            <input type="text" class="form-control {{ $errors->has('sku') ? 'is-invalid' : '' }}" id="sku" name="sku" value="{{ old('sku', $product->sku) }}">
                         </div>
                         <div class="col-sm-5">
                             @if ($errors->has('sku'))
@@ -46,7 +46,7 @@
                     <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label {{ $errors->has('name') ? 'text-danger' : '' }}">Name</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name" name="name" value="{{ old('name') }}">
+                            <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name" name="name" value="{{ old('name', $product->name) }}">
                         </div>
                         <div class="col-sm-5">
                             @if ($errors->has('name'))
@@ -59,7 +59,7 @@
                     <div class="form-group row">
                         <label for="image" class="col-sm-2 col-form-label {{ $errors->has('image') ? 'text-danger' : '' }}">Image</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image" name="image" value="{{ old('image') }}">
+                            <input type="text" class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image" name="image" value="{{ old('image', $product->image) }}">
                         </div>
                         <div class="col-sm-5">
                             @if ($errors->has('image'))
@@ -73,7 +73,7 @@
                         <label for="shortDescription" class="col-sm-2 col-form-label {{ $errors->has('short_description') ? 'text-danger' : '' }}">Short Description</label>
                         <div class="col-sm-5">
                             <textarea class="form-control {{ $errors->has('short_description') ? 'is-invalid' : '' }}" id="shortDescription">
-                                {{ old('short_description') }}
+                                {{ old('short_description', $product->short_description) }}
                             </textarea>
                         </div>
                         <div class="col-sm-5">
@@ -88,7 +88,7 @@
                         <label for="description" class="col-sm-2 col-form-label {{ $errors->has('description') ? 'text-danger' : '' }}">Description</label>
                         <div class="col-sm-5">
                             <textarea class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="description">
-                                {{ old('description') }}
+                                {{ old('description', $product->description) }}
                             </textarea>
                         </div>
                         <div class="col-sm-5">
@@ -102,7 +102,7 @@
                     <div class="form-group row">
                         <label for="price" class="col-sm-2 col-form-label {{ $errors->has('price') ? 'text-danger' : '' }}">Price</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" id="price" name="price" value="{{ old('price') }}">
+                            <input type="text" class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" id="price" name="price" value="{{ old('price', $product->price) }}">
                         </div>
                         <div class="col-sm-5">
                             @if ($errors->has('price'))
@@ -117,8 +117,8 @@
                         <div class="col-sm-5">
                             <select class="form-control {{ $errors->has('show_only') ? 'is-invalid' : '' }}" id="showOnly" name="show_only">
                                 <option value=""> --- </option>
-                                <option value="1" {{ old('show_only') == '1' ? 'selected' : '' }}>Sim</option>
-                                <option value="0" {{ old('show_only') == '0' ? 'selected' : '' }}>Não</option>
+                                <option value="1" {{ old('show_only', $product->show_only) == '1' ? 'selected' : '' }}>Sim</option>
+                                <option value="0" {{ old('show_only', $product->show_only) == '0' ? 'selected' : '' }}>Não</option>
                             </select>
                         </div>
                         <div class="col-sm-5">
@@ -133,8 +133,8 @@
                         <label for="active" class="col-sm-2 col-form-label {{ $errors->has('active') ? 'text-danger' : '' }}">Active</label>
                         <div class="col-sm-5">
                             <select class="form-control {{ $errors->has('active') ? 'is-invalid' : '' }}" id="active" name="active">
-                                <option value="0" {{ old('active') == '0' ? 'selected' : '' }} selected>Não</option>
-                                <option value="1" {{ old('active') == '1' ? 'selected' : '' }}>Sim</option>
+                                <option value="0" {{ old('active', $product->active) == '0' ? 'selected' : '' }} selected>Não</option>
+                                <option value="1" {{ old('active', $product->active) == '1' ? 'selected' : '' }}>Sim</option>
                             </select>
                         </div>
                         <div class="col-sm-5">
@@ -151,7 +151,7 @@
                             <select class="selectpicker" name="categories[]" id="categories" multiple>
                                 <option value=""> --- </option>
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}" {{ $productCategoriesPluckedInIds->contains($category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>

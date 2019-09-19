@@ -29,6 +29,11 @@ class CategoryProductService
         return $this->create($categoryProduct);
     }
 
+    public function unlinkProductCategories(Product $product)
+    {
+        return $this->deleteByProduct($product);
+    }
+
     public function create(CategoryProduct $categoryProduct)
     {
         return $this->repository->create($categoryProduct);
@@ -42,5 +47,10 @@ class CategoryProductService
     public function update(CategoryProduct $categoryProduct, $data)
     {
         return $this->repository->update($categoryProduct, $data);
+    }
+
+    public function deleteByProduct(Product $product)
+    {
+        return $this->repository->deleteByProduct($product);
     }
 }

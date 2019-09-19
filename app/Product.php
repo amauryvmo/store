@@ -12,4 +12,9 @@ class Product extends Model
     protected $fillable = [
         'type', 'sku', 'name', 'short_description', 'description', 'price', 'image', 'active', 'show_only'
     ];
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Category');
+    }
 }

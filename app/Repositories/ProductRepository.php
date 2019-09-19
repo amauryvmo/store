@@ -23,6 +23,11 @@ class ProductRepository
         return $this->model->find($id);
     }
 
+    public function findOneBySKU($sku)
+    {
+        return $this->model->where('sku', $sku)->first();
+    }
+
     public function findAll()
     {
         return $this->model->all();

@@ -13,7 +13,7 @@
             @foreach($products as $product)
                 <tr>
                     <td>
-                        {{ $product->name }}
+                        <a href="{{ route('admin.products.sku', $product->sku) }}">{{ $product->name }}</a>
                     </td>
                 </tr>
             @endforeach

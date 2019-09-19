@@ -22,11 +22,26 @@ class ProductController extends Controller
 
     public function index()
     {
-        $productService = new ProductService();
-        $products = $productService->findAll();
+        $products = $this->service->findAll();
 
         return view('admin.products', [
             'products' => $products
+        ]);
+    }
+
+    public function product($sku)
+    {
+        $categoryService = new CategoryService();
+        $categories = $categoryService->findAll();
+        $product = $this->service->findOneBySKU($sku);
+        $productCategoriesPluckedInIds = $product->categories->pluck('id');
+
+        // $product->categories->pluck('id')->contains(16)
+
+        return view('admin.product', [
+            'product' => $product,
+            'productCategoriesPluckedInIds' => $productCategoriesPluckedInIds,
+            'categories' => $categories
         ]);
     }
 
@@ -66,5 +81,33 @@ class ProductController extends Controller
         return redirect()
             ->route('admin.products')
             ->with('success', "Product successfully registered!");
+    }
+
+    public function update(Request $request, $sku)
+    {
+        $product = $this->service->findOneBySKU($sku);
+
+        $rules = [
+            'name'  => 'required|string',
+            'image' => 'string',
+            'price' => "required|regex:/^\d+(\.\d{1,2})?$/",
+            'active' => 'required|boolean',
+            'show_only' => 'required|boolean',
+            'categories.*' => 'integer|exists:categories,id'
+        ];
+        data_set($rules, 'sku', (
+            $request->get('sku') == $product->sku ? 'required|string' : 'required|string|unique:products'
+        ));
+        $request->validate($rules);
+
+        $dataProduct = $request->only([
+            'sku', 'name', 'price', 'active', 'show_only', 'image'
+        ]);
+        $categories = $request->get('categories', []);
+        $product = $this->service->updateProduct($product, $dataProduct, $categories);
+
+        return redirect()
+            ->route('admin.products.sku', $product->sku)
+            ->with('success', "Product successfully edited!");
     }
 }

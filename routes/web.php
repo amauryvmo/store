@@ -18,7 +18,9 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::get('/categories/{code}', 'CategoryController@category')->name('categories.code');
     Route::get('/products', 'ProductController@index')->name('products');
     Route::get('/products/new', 'ProductController@new')->name('products.new');
+    Route::get('/products/{sku}', 'ProductController@product')->name('products.sku');
     Route::post('/products', 'ProductController@create')->name('products.create');
+    Route::post('/products/{sku}', 'ProductController@update')->name('products.sku.update');
 
     Route::namespace('Auth')->group(function() {
 

@@ -32,4 +32,9 @@ class CategoryProductRepository
     {
         return $this->model->where('id', $categoryProduct->id)->update($data);
     }
+
+    public function deleteByProduct(Product $product)
+    {
+        return $this->model->where('product_id', $product->id)->delete();
+    }
 }
